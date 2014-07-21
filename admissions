@@ -1,0 +1,24 @@
+n = 600851475143 
+
+def isPrime(x): #making sure that the factors of n that we print are in fact, prime
+	if x%2==0: #if x evenly divides by 2, return false because prime factors cannot be even. 2 is the only even prime number.
+		return False
+	if x==3: 
+		return True #3 is the first prime factor of n. 3 will also be the first step in our range function (line 9).
+	else:
+		for y in range(3,x,2): #we want to get test the range of all odd integers between 3 and n. this range function shows three variables: the beginning value (3), the end value (x), and the incremental step (2).
+			if x%y==0: 
+				return False #if y divides x then x is not prime, therefore return false
+	return True 
+
+def findHighPrime(n): #this is function will find the highest prime factor of "n". I've bound this function by the constraints in the loop above.
+	n_sqrt = int(n**0.5)+1 #defining the variable n_sqrt, so that we can nest this variable within the range function below (line 17). the maximum unique divisor for n will be its square root.
+	max_f = 0 
+	for i in range(3,n_sqrt,2): #testing all odd integers between 3 and n_sqrt. 
+		if (n%i == 0) and isPrime(i): #list all factors of n that meet the criteria posed by the isPrime definition (line 3) and range function (line 17)
+			max_f = i #defining that the max factor variable must be an integer.
+	print max_f #print the max factor of n
+			
+
+if __name__ == "__main__": #by doing the main check, this code will execute as a stand-alone program when called upon in the terminal command line. 
+	findHighPrime(n)
